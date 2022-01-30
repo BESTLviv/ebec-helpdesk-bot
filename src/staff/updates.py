@@ -4,7 +4,7 @@ from time import sleep, time
 
 from telebot.types import Message, Chat
 
-from ..data import User, Hackathon, Data
+from ..data import User, Ebec, Data
 from src.staff import utils
 
 
@@ -76,7 +76,7 @@ class Updater:
     def update_menu_from_db(self):
         print("[Updater] Started silent refresh of DB")
         # not_blocked_users = User.objects.filter(is_blocked=False)
-        self.data.hackathon.silent_refresh_menu_data()
+        self.data.ebec.silent_refresh_menu_data()
         print("[Updater] Finished silent refresh of DB")
 
     def _start_everyday_updates(self):

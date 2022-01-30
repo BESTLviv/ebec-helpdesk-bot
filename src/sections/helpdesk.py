@@ -11,6 +11,9 @@ from telebot.types import (
     InlineQueryResultArticle,
     InputTextMessageContent,
 )
+from src.staff import quiz
+
+from src.data.quiz import Quiz
 
 from ..data import Data
 from ..data.user import User, Team
@@ -25,11 +28,14 @@ class HelpdeskSection(Section):
         super().__init__(data)
         self._mailing_destinations = [v.value for v in DestinationEnum]
 
-    def send_start_menu(self, user: User, call=None):
+    def send_helpdesk_menu(self, user: User, call=None):
+        if user.is_registered is False:
+            self._register_user(user)
+            return
         text = "Привіт"
         markup = self._create_item_list_markup()
 
-        self.bot.send_message(user.chat_id, text=text, reply_markup=markup)
+        self.bot.send_message(user.chat_id, text=text, reply_markup=markup)    
 
     def send_inline_result(self, inline_query: InlineQuery):
         result_list = list()

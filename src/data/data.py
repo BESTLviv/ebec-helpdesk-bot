@@ -11,7 +11,7 @@ from src.data.user import Team
 
 
 from .quiz import Question, Quiz
-from ..data import hackathon as hack_db
+from . import ebec as ebec_db
 
 
 class Data:
@@ -24,9 +24,9 @@ class Data:
         me.connect(host=conn_string, ssl_cert_reqs=CERT_NONE)
         print("connection success ")
 
-        #self.create_system_tables()
+        self.create_system_tables()
 
-        #self.hackathon: hack_db.Hackathon = self.get_hackathon()
+        self.ebec: ebec_db.Ebec = self.get_ebec()
 
     @property
     def start_quiz(self) -> Quiz:
@@ -50,12 +50,12 @@ class Data:
 
     @property
     def admin_team(self) -> Team:
-        return Team.objects.filter(name="BEST::Hackath0n").first()
+        return Team.objects.filter(name="EBEC’2022").first()
 
     def create_system_tables(self):
         self._create_quizes()
 
-        self._create_hackathon()
+        self._create_ebec()
 
     def _create_quizes(self):
         if self.start_quiz is None:
@@ -124,12 +124,16 @@ class Data:
             wrong_answer_message="Вибери, будь ласка, один з варіантів 🤡",
         )
 
-        q_tech = Question(
-            name="tech_used",
-            message="Які технології збираєшся використовувати на проекті?",
-            allow_user_input=True,
-            correct_answer_message="Те що треба!",
-            wrong_answer_message="Відповідь треба записувати текстом",
+        q_category = Question(
+            name="ebec_category",
+            message="Ти куди?",
+            buttons=[
+                "Team Design",
+                "Case Study",
+            ],
+            allow_user_input=False,
+            correct_answer_message="Ого, і я туди ж!",
+            wrong_answer_message="Вибери, будь ласка, один з варіантів 🤡",
         )
 
         ##############
@@ -171,7 +175,7 @@ class Data:
             q_school,
             q_study_term,
             # q_city,
-            q_tech,
+            q_category,
             q_contact,
             q_email,
             q_agree,
@@ -264,7 +268,7 @@ class Data:
             name="pib",
             message="ПІБ",
             input_type="text",
-            correct_answer_message="Дякую💚",
+            correct_answer_message="Дякую🧡",
             wrong_answer_message="ERROR: Відповідь має бути текстом👾",
         )
 
@@ -318,7 +322,7 @@ class Data:
             q_tshirt_size,
             q_np_number,
             q_pib,
-            q_is_discord,
+            # q_is_discord,
             q_comments,
             q_city,
             q_is_cv,
@@ -328,13 +332,13 @@ class Data:
 
         print("OrqQuestionsQuiz has been added")
 
-    def _create_hackathon(self):
+    def _create_ebec(self):
 
-        if hack_db.Hackathon.objects.first():
-            print("Hack table is already exists")
+        if ebec_db.Ebec.objects.first():
+            print("Ebec table is already exists")
             return
 
-        hack_db.add_test_data()
+        ebec_db.add_test_data()
 
     def update_quiz_table(self):
         quizes = Quiz.objects
@@ -346,8 +350,8 @@ class Data:
 
             quiz.save()
 
-    def get_hackathon(self) -> hack_db.Hackathon:
-        return hack_db.Hackathon.objects.first()
+    def get_ebec(self) -> ebec_db.Ebec:
+        return ebec_db.Ebec.objects.first()
 
 
 class Content(me.Document):
@@ -355,5 +359,5 @@ class Content(me.Document):
     start_photo = me.StringField()
     user_start_text = me.StringField()
     user_start_photo = me.StringField()
-    hack_start_text = me.StringField()
-    hack_start_photo = me.StringField()
+    ebec_start_text = me.StringField()
+    ebec_start_photo = me.StringField()

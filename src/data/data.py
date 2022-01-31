@@ -136,6 +136,17 @@ class Data:
             wrong_answer_message="Вибери, будь ласка, один з варіантів 🤡",
         )
 
+        q_english = Question(
+            name="english_level",
+            message="Який в тебе рівень англійської?",
+            buttons=[
+                "A1","A2","B1","B2","C1","C2",
+            ],
+            allow_user_input=False,
+            correct_answer_message="London is a capital of Great Britan!",
+            wrong_answer_message="Вибери, будь ласка, один з варіантів 🤡"
+        )
+
         ##############
         q_city = Question(
             name="city",
@@ -174,6 +185,7 @@ class Data:
             q_age,
             q_school,
             q_study_term,
+            q_english,
             # q_city,
             q_category,
             q_contact,

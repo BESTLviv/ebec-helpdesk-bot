@@ -1,14 +1,14 @@
 from .user import User
 from .data import Data
 from .quiz import Question, Quiz
-from .hackathon import Hackathon, HackathonMenu, ReplyButton
+from .ebec import Ebec, EbecMenu, ReplyButton
 
 __all__ = [
     "User",
     "Data",
     "Question",
     "Quiz",
-    "Hackathon",
-    "HackathonMenu",
+    "Ebec",
+    "EbecMenu",
     "ReplyButton",
 ]

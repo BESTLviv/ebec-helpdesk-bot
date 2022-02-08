@@ -13,7 +13,7 @@ from telebot.types import (
 
 from .user import User
 
-DEFAULT_TEXT = "Текст"
+DEFAULT_TEXT = "Привіт! Я розкажу тобі більше про EBEC 2022, та допоможу зареєструватися"
 DEFAULT_PHOTO = "https://ibb.co/rvSM6tr"
 
 

@@ -65,7 +65,7 @@ def _form_max_size_archive(bot: TeleBot, max_size=40) -> str:
         current_size = 0
         archive_index += 1
         # make temp directory
-        with tempfile.TemporaryDirectory(prefix="ejf_bot_") as temp_dir_path:
+        with tempfile.TemporaryDirectory(prefix="ebec_bot_") as temp_dir_path:
             while index < cv_users_size:
                 if current_size + MAXIMUM_FILE_SIZE >= max_size:
                     break

@@ -13,7 +13,9 @@ from telebot.types import (
 
 from .user import User
 
-DEFAULT_TEXT = "Текст"
+DEFAULT_TEXT = (
+    "Привіт! Я розкажу тобі більше про EBEC 2022, та допоможу зареєструватися"
+)
 DEFAULT_PHOTO = "https://ibb.co/rvSM6tr"
 
 
@@ -27,7 +29,7 @@ class ReplyButton(me.EmbeddedDocument):
 
     def send_content(self, bot: TeleBot, user: User):
         if self.special_action:
-            print(f"Кнопка {name} не проста!")
+            print(f"Кнопка {self.name} не проста!")
             return
 
         # if content have link button
@@ -55,7 +57,7 @@ class ReplyButton(me.EmbeddedDocument):
 
 
 class EbecMenu(me.Document):
-    name  = me.StringField(
+    name = me.StringField(
         required=True,
         choices=[
             "informative",
@@ -235,14 +237,34 @@ def add_test_data():
 
     menu_registration = EbecMenu(
         name="registration",
+        menu_text="",
+        menu_photo="https://i.ibb.co/SrMZVJp/welcome-Pic.png",
         start_date=date(2022, 1, 19),
         end_date=date(2022, 2, 12),
         menu_buttons=[
-            ReplyButton(name="Інформація про команду", special_action="team_info"),
-            ReplyButton(name="Правила ebec"),
-            ReplyButton(name="Розклад"),
-            ReplyButton(name="Чат для людей без команди"),
-            ReplyButton(name="Тестове завдання"),
+            ReplyButton(name="Моя команда", special_action="team_info"),
+            ReplyButton(
+                name="Правила ebec",
+                text="Перейди по посиланню нижче, та ознайомся з нашими правилами 📜",
+                photo="https://i.ibb.co/9pvcBkM/rulesPic.png",
+                url_link="https://telegra.ph/EBEC-General-Rules-02-10",
+                url_text="Правила 📜",
+            ),
+            ReplyButton(
+                name="Розклад",
+                text="Розклад стане доступним ближче до початку змагань",
+                photo="https://i.ibb.co/xfZQKxH/schedule-Not-Ready-Pic.png",
+            ),
+            ReplyButton(
+                name="Чат для людей без команди",
+                text="Чат буде доступний згодом",
+                photo="https://i.ibb.co/xfZQKxH/schedule-Not-Ready-Pic.png",
+            ),
+            ReplyButton(
+                name="Тестове завдання",
+                text="Тестове завдання стане доступним ближче до початку змагань",
+                photo="https://i.ibb.co/cc30H9v/test-Task-Pic.png ",
+            ),
         ],
     )
     menu_registration.save()
@@ -302,7 +324,11 @@ def add_test_data():
     )
     menu_after_project.save()
 
-    ebec = Ebec(current_menu=menu_informative)
+    ebec = Ebec(
+        current_menu=menu_registration,
+        start_text="Привіт, юний інженере 👷‍♀️👷\n\nПеред тим, як ти станеш учасником інженерних змагань EBEC 2022, мені потрібно задати тобі декілька питань 🔧",
+        start_photo="https://i.ibb.co/J3nMcpJ/ebecPic.png",
+    )
     ebec.start_photo = DEFAULT_PHOTO
     ebec.start_text = DEFAULT_TEXT
     ebec.save()

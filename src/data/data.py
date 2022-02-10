@@ -1,11 +1,7 @@
 from telebot import TeleBot
-from telegraph import Telegraph
 import mongoengine as me
 from pymongo.ssl_support import CERT_NONE
-from datetime import datetime, timezone, date
 
-import string
-import random
 
 from src.data.user import Team
 
@@ -79,22 +75,22 @@ class Data:
 
         q_name_surname = Question(
             name="name_surname",
-            message="Як мені до тебе звертатися?",
-            correct_answer_message="Гарно звучить 🥰",
-            wrong_answer_message="Введи ім’я текстом 🤡",
+            message="Як тебе звати?👷🏻‍♂️",
+            correct_answer_message="Приємно познайомитися 😌",
+            wrong_answer_message="Введи ім’я текстом 🛠",
         )
 
         q_age = Question(
             name="age",
-            message="Скільки тобі років?",
-            regex="[1-9][0-9]",
-            correct_answer_message="Ого, ми однолітки 🥰",
-            wrong_answer_message="Вкажи свій справжній вік 🤡",
+            message="Скільки тобі років?🤔",
+            regex="^[1-9][0-9]$",
+            correct_answer_message="Клас, твій зоряний час💥",
+            wrong_answer_message="Вкажи свій справжній вік 🔨 ",
         )
 
         q_school = Question(
             name="school",
-            message="Де вчишся? Вибери або введи.",
+            message="Де вчишся? Вибери або введи 🏛",
             buttons=[
                 "НУЛП",
                 "ЛНУ",
@@ -104,13 +100,13 @@ class Data:
                 "Ще в школі",
                 "Вже закінчив(-ла)",
             ],
-            correct_answer_message="Клас 🥰",
-            wrong_answer_message="Введи назву текстом 🤡",
+            correct_answer_message="Супер 🧡",
+            wrong_answer_message="Введи назву текстом 🛠",
         )
 
         q_study_term = Question(
             name="study_term",
-            message="Який ти курс?",
+            message="Який ти курс? ⚙️",
             buttons=[
                 "Перший",
                 "Другий",
@@ -120,31 +116,36 @@ class Data:
                 "Нічого з переліченого",
             ],
             allow_user_input=False,
-            correct_answer_message="Ідеальний час, щоб будувати кар'єру 🥰",
-            wrong_answer_message="Вибери, будь ласка, один з варіантів 🤡",
+            correct_answer_message="Ідеальний час щоб поінженерити 🔥",
+            wrong_answer_message="Вибери, будь ласка, один з варіантів 🔧",
         )
 
         q_category = Question(
             name="ebec_category",
-            message="Ти куди?",
+            message="Ти куди?👷🏻‍♂️",
             buttons=[
                 "Team Design",
                 "Case Study",
             ],
             allow_user_input=False,
             correct_answer_message="Ого, і я туди ж!",
-            wrong_answer_message="Вибери, будь ласка, один з варіантів 🤡",
+            wrong_answer_message="Вибери, будь ласка, один з варіантів 🤔⚙️",
         )
 
         q_english = Question(
             name="english_level",
             message="Який в тебе рівень англійської?",
             buttons=[
-                "A1","A2","B1","B2","C1","C2",
+                "A1",
+                "A2",
+                "B1",
+                "B2",
+                "C1",
+                "C2",
             ],
             allow_user_input=False,
-            correct_answer_message="London is a capital of Great Britan!",
-            wrong_answer_message="Вибери, будь ласка, один з варіантів 🤡"
+            correct_answer_message="London is a capital of Great Britain!",
+            wrong_answer_message="Вибери, будь ласка, один з варіантів 🤡",
         )
 
         ##############
@@ -158,24 +159,24 @@ class Data:
 
         q_contact = Question(
             name="contact",
-            message="Обміняємося контактами?",
+            message="Обміняємося контактами?📲",
             buttons=["Тримай!"],
             input_type="contact",
-            correct_answer_message="Дякую. А я залишаю тобі контакт головного організатора: @Slavkoooo 🥰",
-            wrong_answer_message="Надішли, будь ласка, свій контакт 🤡",
+            correct_answer_message="Дякую. А я залишаю тобі контакт головного організатора: @thunderosee👷🏻",
+            wrong_answer_message="Надішли, будь ласка, свій контакт ⚙️",
         )
 
         q_email = Question(
             name="email",
-            message="Наостанок, вкажи адресу своєї поштової скриньки.",
+            message="А тепер вкажи свою електронну адресу 💻",
             regex="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$",
-            correct_answer_message="Дякую 🥰",
-            wrong_answer_message="Введи, будь ласка, електронну адресу 🤡",
+            correct_answer_message="Дякую 🧡",
+            wrong_answer_message="Введи, будь ласка, електронну адресу ⚙️",
         )
 
         q_agree = Question(
             name="user_agreements",
-            message="Залишилося тільки дати згоду на обробку даних.",
+            message="Залишилося тільки дати згоду на обробку даних ✅",
             buttons=["Я погоджуюсь."],
             allow_user_input=False,
         )
@@ -187,7 +188,7 @@ class Data:
             q_study_term,
             q_english,
             # q_city,
-            q_category,
+            # q_category,
             q_contact,
             q_email,
             q_agree,
@@ -201,19 +202,32 @@ class Data:
 
         q_team_name = Question(
             name="team_name",
-            message="Напиши мені назву своєї команди",
-            correct_answer_message="It is fucking amazing!",
-            wrong_answer_message="Введи назву текстом 🤡",
+            message="Напиши мені назву своєї команди 👷🏻‍♀️👷🏾👷🏻‍♂️",
+            correct_answer_message="Круто, дякую 🧡 ",
+            wrong_answer_message="Введи назву текстом 🔧⚙️",
         )
 
         q_password = Question(
             name="password",
-            message="Придумай пароль для входу в твою команду",
-            correct_answer_message="It is fucking amazing!",
-            wrong_answer_message="Введи пароль текстом 🤡",
+            message="Придумай пароль для входу в твою команду 🤔",
+            correct_answer_message="EBEC is waiting for you 🔥",
+            wrong_answer_message="Введи пароль текстом 🛠",
         )
 
-        quiz.questions = [q_team_name, q_password]
+        q_team_type = Question(
+            name="team_type",
+            message="""Якого типу команда?\n
+Case Study — категорія, у якій команда проводить аналіз проблем та шукає ефективний варіант їх вирішення. 
+Щоб розробити стратегію, учасникам знадобиться креативний підхід та великий обсяг знань у технічних, адміністративних, економічних та виробничих галузях.
+
+Team Design — категорія, у якій команди створюють технічні конструкції з наданих матеріалів протягом обмеженого часу в галузях механіки, електроніки, біомедичної інженерії та радіотехніки.""",  # TODO: розписати детальніше це питання + інфу про кожну з видів команд
+            buttons=["Case Study", "Team Design"],
+            allow_user_input=False,
+            correct_answer_message="EBEC is waiting for you 🔥",
+            wrong_answer_message="Вибери з переліченого 🛠",
+        )
+
+        quiz.questions = [q_team_name, q_password, q_team_type]
         quiz.save()
 
         print("RegisterTeamQuiz has been added")
@@ -223,15 +237,15 @@ class Data:
 
         q_login = Question(
             name="login",
-            message="Введи логін",
-            correct_answer_message="It is fucking amazing!",
+            message="Введи логін 😌",
+            correct_answer_message="Супер!",
             wrong_answer_message="Такий логін не зареєстрований у системі.",
         )
 
         q_password = Question(
             name="password",
-            message="Введи пароль",
-            correct_answer_message="It is fucking amazing!",
+            message="Введи пароль 👷🏻",
+            correct_answer_message="Раді знову бачити тебе",
             wrong_answer_message="Пароль невірний. Спробуй ще раз",
         )
 
@@ -245,11 +259,11 @@ class Data:
 
         q_file_request = Question(
             name="file_request",
-            message="Надішли своє резюме файлом.",
+            message="Надішли своє резюме файлом 💻",
             input_type="document",
             allow_user_input=True,
-            correct_answer_message="It is fucking amazing!",
-            wrong_answer_message="Я очікував від тебе файл, а ти...",
+            correct_answer_message="Круто, тепер про тебе дізнаються всі інженери України!👷🏻‍♂️💥",
+            wrong_answer_message="Я очікував від тебе файл...",
         )
 
         quiz.questions = [q_file_request]
@@ -262,18 +276,18 @@ class Data:
 
         q_tshirt_size = Question(
             name="tshirt_size",
-            message="Який у тебе розмір футболки?",
+            message="Який у тебе розмір футболки?👕",
             input_type="text",
-            correct_answer_message="В мене також🔥",
-            wrong_answer_message="ERROR: Відповідь має бути щось з цього S, M, L, XL, XXL, XXXL👾",
+            correct_answer_message="Супер, записали🧡",
+            wrong_answer_message="ERROR: Відповідь має бути щось з цього S, M, L, XL, XXL, XXXL🤔⚙️",
         )
 
         q_np_number = Question(
             name="new_post_number",
-            message="З якого відділення Нової пошти тобі зручно забрати посилку?",
+            message="З якого відділення Нової пошти тобі зручно забрати посилку?📦",
             input_type="text",
-            correct_answer_message="Супер🔥",
-            wrong_answer_message="ERROR: Напиши номер відділення👾",
+            correct_answer_message="Супер🧡",
+            wrong_answer_message="ERROR: Напиши номер відділення🤔⚙️",
         )
 
         q_pib = Question(
@@ -281,9 +295,9 @@ class Data:
             message="ПІБ",
             input_type="text",
             correct_answer_message="Дякую🧡",
-            wrong_answer_message="ERROR: Відповідь має бути текстом👾",
+            wrong_answer_message="ERROR: Відповідь має бути текстом🤔⚙️",
         )
-
+        ############################################
         q_is_discord = Question(
             name="discord",
             message="Маєш аккаунт в Discord?\nЯкщо ні, тоді створи його🔥\nhttps://discord.com/",
@@ -293,21 +307,21 @@ class Data:
             correct_answer_message="Супер🔥",
             wrong_answer_message="ERROR: Вибери один з поданих варіантів👾",
         )
-
+        ############################################
         q_comments = Question(
             name="comments",
             message="Маєш якісь коментарі?",
             input_type="text",
-            correct_answer_message="Супер🔥",
-            wrong_answer_message="ERROR: Відповідь має бути текстом👾",
+            correct_answer_message="Супер🧡",
+            wrong_answer_message="ERROR: Відповідь має бути текстом🤔⚙️",
         )
 
         q_city = Question(
             name="city",
             message="Місто проживання",
             input_type="text",
-            correct_answer_message="Круто🔥",
-            wrong_answer_message="ERROR: Відповідь має бути текстом👾",
+            correct_answer_message="Круто🧡",
+            wrong_answer_message="ERROR: Відповідь має бути текстом🤔⚙️",
         )
 
         q_is_cv = Question(
@@ -316,8 +330,8 @@ class Data:
             input_type="text",
             buttons=["Так", "Ні"],
             allow_user_input=False,
-            correct_answer_message="Супер🔥",
-            wrong_answer_message="ERROR: Вибери один з поданих варіантів👾",
+            correct_answer_message="Молодець🧡",
+            wrong_answer_message="ERROR: Вибери один з поданих варіантів🤔⚙️",
         )
 
         q_final = Question(
@@ -326,8 +340,8 @@ class Data:
             input_type="text",
             buttons=["Даю дозвіл"],
             allow_user_input=False,
-            correct_answer_message="Супер🔥",
-            wrong_answer_message="ERROR: Неправильний формат👾",
+            correct_answer_message="Дякуємо🧡",
+            wrong_answer_message="ERROR: Неправильний формат🤔⚙️",
         )
 
         quiz.questions = [

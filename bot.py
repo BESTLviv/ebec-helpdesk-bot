@@ -5,11 +5,13 @@ from telebot.types import Message, InlineQuery
 
 from src.data import Data, helpdesk
 from src.sections.main_menu import MainMenuSection
+from src.sections.admin import AdminSection
 
 # from src.sections.helpdesk import HelpdeskSection
 
 from src.staff.updates import Updater
 from src.sections.team_menu import TeamMenu
+from src.sections.helpdesk import HelpdeskSection
 
 
 # from src.staff import utils
@@ -37,8 +39,7 @@ data = Data(conn_string=CONNECTION_STRING, bot=bot)
 
 # main_menu_section = MainMenuSection(data=data)
 team_section = TeamMenu(data=data)
-# admin_section = AdminSection(data=data)
-from src.sections.helpdesk import HelpdeskSection
+admin_section = AdminSection(data=data)
 
 helpdesk_section = HelpdeskSection(data=data)
 main_menu_section = MainMenuSection(data=data)
@@ -84,31 +85,33 @@ def handle_text_buttons(message):
 
         elif message_text == "__next_menu":
             data.ebec.switch_to_next_menu()
-            main_menu_section.send_start_menu(user)            
+            main_menu_section.send_start_menu(user)
 
+        elif message_text == "naked_ebec":
+            admin_section.send_admin_menu(user)
 
     except Exception as e:
         print(e)
 
 
-# @bot.callback_query_handler(func=lambda call: True)
-# def handle_callback_query(call):
-#     # TODO - check if messsage exists (it is not exist in answered inline query)
-#     user = updater.update_user_interaction_time(call.message)
-#     section = call.data.split(";")[0]
+@bot.callback_query_handler(func=lambda call: True)
+def handle_callback_query(call):
+    # TODO - check if messsage exists (it is not exist in answered inline query)
+    user = updater.update_user_interaction_time(call.message)
+    section = call.data.split(";")[0]
 
-#     try:
-#         if section == "Team":
-#             team_section.process_callback(user, call)
+    try:
+        if section == "Team":
+            team_section.process_callback(user, call)
 
-#         elif section == "Admin":
-#             admin_section.process_callback(user, call)
+        elif section == "Admin":
+            admin_section.process_callback(user, call)
 
-#         else:
-#             bot.answer_callback_query(call.id)
+        else:
+            bot.answer_callback_query(call.id)
 
-#     except Exception as e:
-#         print(e)
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":

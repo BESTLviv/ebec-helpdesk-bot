@@ -27,6 +27,7 @@ class Resume(me.EmbeddedDocument):
 class Team(me.Document):
     name = me.StringField(required=True)
     password = me.StringField(required=True)
+    team_type = me.StringField(required=True, choices=["Case Study", "Team Design"])
     photo = me.StringField()
     registration_datetime = me.DateTimeField(required=True)
     test_task = me.StringField(required=False)
@@ -92,17 +93,17 @@ class Team(me.Document):
 
         team_name = str(self.name).replace("<", "*").replace(">", "*")
         return (
-            f"Команда <b>{team_name}</b>\n\n"
+            f"Команда <b>{team_name}</b>\n<b>{self.team_type}</b>\n\n"
             f"<b>Учасники команди:</b>\n"
             f"{users_list}\n\n"
             f"<b>Резюме:</b>\n"
             f"{cv_list}\n\n"
-            f"<b>Заповнена орг форма?</b>\n"
+            f"<b>Заповнена орг форма?</b> (форма стане доступною згодом)\n"
             f"{org_passed_users_list}\n\n"
-            f"<b>Гітхаб?</b>\n"
-            f"{is_github_repo}\n\n"
+            # f"<b>Гітхаб?</b>\n"
+            # f"{is_github_repo}\n\n"
             f"<b>Тестове завдання</b> - {self.test_task_status[0]} ({self.test_task_status[1]})\n"
-            f"<b>Команда бере участь в хакатоні</b> - {is_participate}"
+            f"<b>Команда бере участь в EBEC</b> - {is_participate}"
         )
 
 

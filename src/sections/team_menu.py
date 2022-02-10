@@ -18,7 +18,7 @@ from ..staff import quiz, utils
 
 class TeamMenu(Section):
 
-    MENU_PHOTO: str = "https://i.ibb.co/SxkcpyG/Desktop88-5.png"
+    MENU_PHOTO: str = "https://i.ibb.co/6rjXFXp/teamPic.png"
 
     def __init__(self, data: Data):
         super().__init__(data)
@@ -153,6 +153,7 @@ class TeamMenu(Section):
         team = Team(
             name=team_name,
             password=container["password"],
+            team_type=container["team_type"],
             registration_datetime=utils.get_now(),
         )
         team.save()
@@ -244,15 +245,12 @@ class TeamMenu(Section):
         markup = InlineKeyboardMarkup()
 
         if user.team is None:
-            if (
-                self.data.ebec.current_menu
-                == self.data.ebec.p_registration_menu
-            ):
+            if self.data.ebec.current_menu == self.data.ebec.p_registration_menu:
                 markup.add(register_team_btn, login_team_btn)
             else:
                 markup.add(login_team_btn)
         else:
-            markup.add(git_link_btn)
+            # markup.add(git_link_btn)
             markup.add(cv_btn)
             # markup.add(org_quiz_btn)
             markup.add(logout_team_btn)

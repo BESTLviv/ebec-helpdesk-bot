@@ -34,6 +34,19 @@ class MainMenuSection(Section):
 
         self.data.ebec.current_menu.send_menu(self.bot, user)
 
+    def send_help(self, user: User, bot):
+        markup = InlineKeyboardMarkup()
+
+        url_button = InlineKeyboardButton(text="Допомога⁉️", url="https://telegra.ph/EBEC22-Help-02-10")
+        markup.add(url_button)
+
+        bot.send_photo(
+            chat_id=user.chat_id,
+            photo="https://i.ibb.co/J3nMcpJ/ebecPic.png",
+            caption="Перейди по посиланню нижче, та отримай допогу🧡",
+            reply_markup=markup,
+        )  
+
     def process_button(self, user: User, btn_name: str):
 
         button = self.data.ebec.current_menu.get_btn_by_name(btn_name)

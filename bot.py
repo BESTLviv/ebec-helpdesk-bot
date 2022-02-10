@@ -58,6 +58,18 @@ def start_bot(message: Message):
         print(f"Exception during start - {e}")
         bot.send_message(message.chat.id, text="Упс, щось пішло не так. Спробуй знову!")
 
+@bot.message_handler(commands=["help"]) 
+def help_bot(message: Message):
+
+    try:
+        user = updater.update_user_interaction_time(message)
+        main_menu_section.send_help(user,bot)
+        
+    except Exception as e:
+        print(f"Exception during start - {e}")
+        bot.send_message(message.chat.id, text="Упс, щось пішло не так. Спробуй знову!")    
+               
+
 
 @bot.inline_handler(lambda query: len(query.query) >= 0)
 def query_text(inline_query: InlineQuery):

@@ -329,6 +329,4 @@ def add_test_data():
         start_text="Привіт, юний інженере 👷‍♀️👷\n\nПеред тим, як ти станеш учасником інженерних змагань EBEC 2022, мені потрібно задати тобі декілька питань 🔧",
         start_photo="https://i.ibb.co/J3nMcpJ/ebecPic.png",
     )
-    ebec.start_photo = DEFAULT_PHOTO
-    ebec.start_text = DEFAULT_TEXT
     ebec.save()

@@ -244,7 +244,7 @@ def add_test_data():
         menu_buttons=[
             ReplyButton(name="Моя команда", special_action="team_info"),
             ReplyButton(
-                name="Правила ebec",
+                name="Правила EBEC",
                 text="Перейди по посиланню нижче, та ознайомся з нашими правилами 📜",
                 photo="https://i.ibb.co/9pvcBkM/rulesPic.png",
                 url_link="https://telegra.ph/EBEC-General-Rules-02-10",

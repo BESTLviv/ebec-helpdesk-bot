@@ -43,7 +43,7 @@ class MainMenuSection(Section):
         bot.send_photo(
             chat_id=user.chat_id,
             photo="https://i.ibb.co/J3nMcpJ/ebecPic.png",
-            caption="Перейди по посиланню нижче, та отримай допогу🧡",
+            caption="Перейди по посиланню нижче, та отримай допомогу🧡",
             reply_markup=markup,
         )  
 

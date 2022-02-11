@@ -66,10 +66,7 @@ class Team(me.Document):
 
     @property
     def full_info(self) -> str:
-        used_techs = "\n".join(
-            [user.additional_info["tech_used"] for user in self.members]
-        )
-        return f"{self}\n\n" f"<b>Технології:</b>\n" f"{used_techs}"
+        return f"{self}"
 
     def __str__(self) -> str:
         members = self.members

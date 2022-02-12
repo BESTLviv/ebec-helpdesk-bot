@@ -166,11 +166,11 @@ class AdminSection(Section):
 
         if is_approved:
             team.test_task_passed = True
-            admin_text = f"Команда {team.name} бере участь в хакатоні!"
+            admin_text = f"Команда {team.name_parsed} бере участь в хакатоні!"
             team_photo = "https://i.ibb.co/p1vKNTd/greetings.png"
         else:
             team.test_task_passed = False
-            admin_text = f"Команда {team.name} не братиме участь в хакатоні!"
+            admin_text = f"Команда {team.name_parsed} не братиме участь в хакатоні!"
             team_photo = "https://i.ibb.co/0CKghfH/greetings-sad.png"
 
         team.save()

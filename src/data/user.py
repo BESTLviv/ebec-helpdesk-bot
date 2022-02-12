@@ -68,6 +68,10 @@ class Team(me.Document):
     def full_info(self) -> str:
         return f"{self}"
 
+    @property
+    def name_parsed(self) -> str:
+        return self.name.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
     def __str__(self) -> str:
         members = self.members
 
@@ -88,7 +92,8 @@ class Team(me.Document):
 
         is_github_repo = self.github_repo if self.github_repo else "Не здано ❌"
 
-        team_name = str(self.name).replace("<", "*").replace(">", "*")
+        team_name = self.name_parsed
+
         return (
             f"Команда <b>{team_name}</b>\n<b>{self.team_type}</b>\n\n"
             f"<b>Учасники команди:</b>\n"

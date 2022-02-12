@@ -124,7 +124,7 @@ class TeamMenu(Section):
 
         if user.team:
             self.bot.send_message(
-                user.chat_id, f"Ти вже є учасником команди {user.team.name}"
+                user.chat_id, f"Ти вже є учасником команди {user.team.name_parsed}"
             )
             return
 
@@ -163,7 +163,7 @@ class TeamMenu(Section):
 
         self.bot.send_message(
             user.chat_id,
-            text=f"Команда {user.team.name} успішно добавлена!",
+            text=f"Команда {user.team.name_parsed} успішно добавлена!",
             reply_markup=self.data.ebec.current_menu.markup,
         )
 
@@ -171,7 +171,7 @@ class TeamMenu(Section):
 
         if user.team:
             self.bot.send_message(
-                user.chat_id, f"Ти вже є учасником команди {user.team.name}"
+                user.chat_id, f"Ти вже є учасником команди {user.team.name_parsed}"
             )
             return
 
@@ -341,7 +341,7 @@ class TeamLogin:
 
         self.data.bot.send_message(
             user.chat_id,
-            text=f"Ти успішно увійшов в команду {self.team.name}!",
+            text=f"Ти успішно увійшов в команду {self.team.name_parsed}!",
             reply_markup=self.data.ebec.current_menu.markup,
         )
 

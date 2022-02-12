@@ -37,7 +37,9 @@ class MainMenuSection(Section):
     def send_help(self, user: User, bot):
         markup = InlineKeyboardMarkup()
 
-        url_button = InlineKeyboardButton(text="Допомога⁉️", url="https://telegra.ph/EBEC22-Help-02-10")
+        url_button = InlineKeyboardButton(
+            text="Допомога⁉️", url="https://telegra.ph/EBEC22-Help-02-10"
+        )
         markup.add(url_button)
 
         bot.send_photo(
@@ -45,7 +47,7 @@ class MainMenuSection(Section):
             photo="https://i.ibb.co/J3nMcpJ/ebecPic.png",
             caption="Перейди по посиланню нижче, та отримай допомогу🧡",
             reply_markup=markup,
-        )  
+        )
 
     def process_button(self, user: User, btn_name: str):
 
@@ -78,7 +80,7 @@ class MainMenuSection(Section):
         text = f"Команда потребує допомоги!"
         markup = InlineKeyboardMarkup()
         btn = InlineKeyboardButton(
-            text=user.team.name,
+            text=user.team.name_parsed,
             callback_data=self.form_admin_callback(
                 action="TeamInfoMenu", team_id=user.team.id, new=True
             ),
